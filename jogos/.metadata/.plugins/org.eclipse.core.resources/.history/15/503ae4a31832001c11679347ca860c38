@@ -1,0 +1,23 @@
+package teste_curso_games;
+
+public class Gamer {
+	
+	public static void main(String[] args) {
+		
+		Player player = new Player();
+		ElfiInimigo elf = new ElfiInimigo(10);
+		
+		System.out.println(player.getVida());
+		
+		player.perderVida();
+		player.perderVida();
+		
+		player.ganharVida();
+		
+		System.out.println(player.getVida());
+		
+		elf.tomarDano();
+		
+		System.out.println(elf.getVida());
+	}
+}

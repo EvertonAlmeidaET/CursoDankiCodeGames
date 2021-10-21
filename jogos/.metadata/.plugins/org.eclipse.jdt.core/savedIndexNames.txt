@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+E:\curso-danki-code\jogos\.metadata\.plugins\org.eclipse.jdt.core
+2655165038.index
+2029931347.index

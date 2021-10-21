@@ -1,0 +1,11 @@
+package teste_curso_games;
+
+public class Gamer {
+	
+	public static void main(String[] args) {
+		
+		Player player = new Player();
+		
+		System.out.println(player.getVida());
+	}
+}
