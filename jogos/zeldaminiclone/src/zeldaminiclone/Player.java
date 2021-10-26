@@ -10,27 +10,49 @@ public class Player extends Rectangle {
 	
 	private boolean right, up, down, left;
 	
+	private int curAnimation = 0;
+	private int curFrames = 0;
+	private int targetFrame = 15;
+	
 	public Player(int x, int y) {
 		super(x, y, 32, 32);
 	}
 	
 	public void tick() {
-		if(this.right) {
+		boolean move = false;
+		if(this.right && World.isFree(x+spd, y)) {
 			x+=this.spd;
-		} else if(this.left) {
+			move = true;
+		} else if(this.left && World.isFree(x-spd, y)) {
 			x-=this.spd;
+			move = true;
 		}
 		
-		if(this.up) {
+		if(this.up && World.isFree(x, y-spd)) {
 			y-=this.spd;
-		} else if(this.down) {
+			move = true;
+		} else if(this.down && World.isFree(x, y+spd)) {
 			y+=this.spd;
+			move = true;
+		}
+		
+		if(move) {
+			this.curFrames++;
+			if(curFrames == targetFrame) {
+				curFrames = 0;
+				curAnimation++;
+				if(curAnimation == Spritesheet.getPLAYER_FRONT().length) {
+					curAnimation = 0;
+				}
+				
+			}
 		}
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		g.fillRect(x, y, width, height);
+//		g.setColor(Color.blue);
+//		g.fillRect(x, y, width, height);
+		g.drawImage(Spritesheet.getPLAYER_FRONT()[this.curAnimation], x, y, 32, 32, null);
 	}
 
 	public int getSpd() {
@@ -71,6 +93,30 @@ public class Player extends Rectangle {
 
 	public void setLeft(boolean left) {
 		this.left = left;
+	}
+	
+	public int getCurAnimation() {
+		return this.curAnimation;
+	}
+	
+	public void setCurAnimation(int curAnimation) {
+		this.curAnimation = curAnimation;
+	}
+
+	public int getCurFrames() {
+		return this.curFrames;
+	}
+
+	public void setCurFrames(int curFrames) {
+		this.curFrames = curFrames;
+	}
+
+	public int getTargetFrame() {
+		return this.targetFrame;
+	}
+
+	public void setTargetFrame(int targetFrame) {
+		this.targetFrame = targetFrame;
 	}
 	
 	
