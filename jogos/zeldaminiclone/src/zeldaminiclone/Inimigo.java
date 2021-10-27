@@ -5,11 +5,11 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Rectangle {
+public class Inimigo extends Rectangle {
 	
 	private int spd = 4;
 	
-	private boolean right, up, down, left;
+	private int right = 1, up = 0, down = 0, left = 0;
 	
 	private int curAnimation = 0;
 	private int curFrames = 0;
@@ -19,36 +19,27 @@ public class Player extends Rectangle {
 	
 	private static List<Bullet> BULLETS = new ArrayList<>();
 	
-	public Player(int x, int y) {
+	public Inimigo(int x, int y) {
 		super(x, y, 32, 32);
 	}
 	
 	public void tick() {
-		boolean move = false;
-		if(this.right && World.isFree(x+spd, y)) {
-			x+=this.spd;
-			move = true;
-			dir = 1;
-		} else if(this.left && World.isFree(x-spd, y)) {
-			x-=this.spd;
-			move = true;
-			dir = -1;
-		}
-		
-		if(this.up && World.isFree(x, y-spd)) {
-			y-=this.spd;
-			move = true;
-		} else if(this.down && World.isFree(x, y+spd)) {
-			y+=this.spd;
-			move = true;
-		}
+		boolean move = true;
+		if(this.right == 1 && World.isFree(x+spd, y)) {
+			x++;
+		} 
+//		else if(this.left == 0 && World.isFree(x-spd, y)) {
+//			x--;
+//			move = true;
+//			dir = -1;
+//		}
 		
 		if(move) {
 			this.curFrames++;
 			if(curFrames == targetFrame) {
 				curFrames = 0;
 				curAnimation++;
-				if(curAnimation == Spritesheet.getPLAYER_FRONT().length) {
+				if(curAnimation == Spritesheet.getINIMIGO_FRONT().length) {
 					curAnimation = 0;
 				}
 				
@@ -67,9 +58,8 @@ public class Player extends Rectangle {
 	}
 	
 	public void render(Graphics g) {
-//		g.setColor(Color.blue);
-//		g.fillRect(x, y, width, height);
-		g.drawImage(Spritesheet.getPLAYER_FRONT()[this.curAnimation], x, y, 32, 32, null);
+
+		g.drawImage(Spritesheet.getINIMIGO_FRONT()[this.curAnimation], x, y, 32, 32, null);
 		
 		for(Bullet bala : BULLETS) {
 			bala.render(g);
@@ -84,35 +74,35 @@ public class Player extends Rectangle {
 		this.spd = spd;
 	}
 
-	public boolean isRight() {
+	public int isRight() {
 		return this.right;
 	}
 
-	public void setRight(boolean right) {
+	public void setRight(int right) {
 		this.right = right;
 	}
 
-	public boolean isUp() {
+	public int isUp() {
 		return this.up;
 	}
 
-	public void setUp(boolean up) {
+	public void setUp(int up) {
 		this.up = up;
 	}
 
-	public boolean isDown() {
+	public int isDown() {
 		return this.down;
 	}
 
-	public void setDown(boolean down) {
+	public void setDown(int down) {
 		this.down = down;
 	}
 
-	public boolean isLeft() {
+	public int isLeft() {
 		return this.left;
 	}
 
-	public void setLeft(boolean left) {
+	public void setLeft(int left) {
 		this.left = left;
 	}
 	

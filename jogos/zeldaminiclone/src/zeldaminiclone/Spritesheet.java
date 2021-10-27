@@ -12,6 +12,7 @@ public class Spritesheet {
 	private static BufferedImage SPRITESHEET;
 	
 	private static BufferedImage[] PLAYER_FRONT;
+	private static BufferedImage[] INIMIGO_FRONT;
 
 	private static BufferedImage TILEWAll;
 	
@@ -23,10 +24,18 @@ public class Spritesheet {
 			e.printStackTrace();
 		}
 		
+		//	PLAYER
 		PLAYER_FRONT = new BufferedImage[2];
 		PLAYER_FRONT[0] = Spritesheet.getSprite(1, 11, 16, 16);
 		PLAYER_FRONT[1] = Spritesheet.getSprite(19, 11, 16, 16);
+		
+		// TIJOLO
 		TILEWAll = Spritesheet.getSprite(288, 209, 16, 16);
+		
+		// INIMIGO
+		INIMIGO_FRONT = new BufferedImage[2];
+		INIMIGO_FRONT[0] = Spritesheet.getSprite(284, 234, 16, 16);
+		INIMIGO_FRONT[1] = Spritesheet.getSprite(302, 234, 16, 16);
 		
 	}
 	
@@ -40,6 +49,10 @@ public class Spritesheet {
 
 	public static BufferedImage[] getPLAYER_FRONT() {
 		return Spritesheet.PLAYER_FRONT;
+	}
+	
+	public static BufferedImage[] getINIMIGO_FRONT() {
+		return Spritesheet.INIMIGO_FRONT;
 	}
 	
 	
